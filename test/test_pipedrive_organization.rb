@@ -1,12 +1,9 @@
 require 'helper'
 
-class TestPipedriveOrganization < Test::Unit::TestCase
-  def setup
-    Pipedrive.authenticate("some-token")
-  end
+class TestPipedriveOrganization < Minitest::Test
 
   should "execute a valid person request" do
-    stub_request(:post, "http://api.pipedrive.com/v1/organizations?api_token=some-token").
+    WebMock.stub_request(:post, "https://api.pipedrive.com/v1/organizations?api_token=xunda-token").
       with(:body => {
           "name" => "Dope.org"
         },
@@ -30,7 +27,7 @@ class TestPipedriveOrganization < Test::Unit::TestCase
 
     organization = ::Pipedrive::Organization.create({
       name: "Dope.org"
-    })
+    }, 'xunda-token')
 
     assert_equal "Dope.org", organization.name
   end

@@ -1,14 +1,11 @@
 require 'helper'
 
-class TestPipedriveStage < Test::Unit::TestCase
-  def setup
-    Pipedrive.authenticate("some-token")
-  end
+class TestPipedriveStage < Minitest::Test
 
   should "execute a valid stage request" do
     body = {}
 
-    stub_request(:get, "http://api.pipedrive.com/v1/stages?api_token=some-token").
+    WebMock.stub_request(:get, "https://api.pipedrive.com/v1/stages?api_token=xunda-token").
       with(:body => body,
         :headers => {
           'Accept'=>'application/json',
@@ -28,7 +25,7 @@ class TestPipedriveStage < Test::Unit::TestCase
         }
       )
 
-    stages = ::Pipedrive::Stage.all
+    stages = ::Pipedrive::Stage.all('xunda-token')
     first_stage = stages.first;
 
     assert_equal 5, stages.count

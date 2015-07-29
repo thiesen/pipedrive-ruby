@@ -1,9 +1,6 @@
 require 'helper'
 
-class TestPipedriveNote < Test::Unit::TestCase
-  def setup
-    Pipedrive.authenticate("some-token")
-  end
+class TestPipedriveNote < Minitest::Test
 
   should "execute a valid person request" do
     body = {
@@ -13,7 +10,7 @@ class TestPipedriveNote < Test::Unit::TestCase
       # deal_id
     }
 
-    stub_request(:post, "http://api.pipedrive.com/v1/notes?api_token=some-token").
+    WebMock.stub_request(:post, "https://api.pipedrive.com/v1/notes?api_token=xunda-token").
       with(:body => body, :headers => {
           'Accept'=>'application/json',
           'Content-Type'=>'application/x-www-form-urlencoded',
@@ -32,7 +29,7 @@ class TestPipedriveNote < Test::Unit::TestCase
         }
       )
 
-    note = ::Pipedrive::Note.create(body)
+    note = ::Pipedrive::Note.create(body, 'xunda-token')
 
     assert_equal "abc", note.content
     assert_equal 1, note.person_id
