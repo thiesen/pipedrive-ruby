@@ -15,12 +15,12 @@ require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
   gem.name = "pipedrive-ruby"
-  gem.homepage = "https://github.com/GeneralScripting/pipedrive-ruby.git"
+  gem.homepage = "https://github.com/thiesen/pipedrive-ruby.git"
   gem.license = "MIT"
   gem.summary = %Q{Ruby wrapper for the Pipedrive API}
   gem.description = %Q{Ruby wrapper for the Pipedrive API}
   gem.email = "jan@general-scripting.com"
-  gem.authors = ["Jan Schwenzien", "Waldemar Kusnezow", "Joel Courtney"]
+  gem.authors = ["Jan Schwenzien", "Waldemar Kusnezow", "Joel Courtney", "Nathan Thiesen"]
   # dependencies defined in Gemfile
 end
 Jeweler::RubygemsDotOrgTasks.new
