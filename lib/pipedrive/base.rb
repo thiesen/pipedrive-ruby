@@ -83,12 +83,13 @@ module Pipedrive
         if res.ok?
           data = res['data'].nil? ? [] : res['data'].map{|obj| new(obj)}
           if get_absolutely_all && has_pagination?(res)
-            options[:query] = options[:query].merge({:start => res['additional_data']['pagination']['next_start']})
-            data += self.all(nil,options, api_token, true)
+            options[:query]  ||= {}
+            options[:query].merge!({:start => res['additional_data']['pagination']['next_start']})
+            data += self.all(api_token, true, nil, options)
           end
           data
         else
-          bad_response(res,attrs)
+          bad_response(res,options)
         end
       end
 
