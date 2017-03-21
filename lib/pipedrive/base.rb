@@ -125,10 +125,11 @@ module Pipedrive
       end
 
       def delete(id, api_token = nil)
-        res_path = "#{resource_path}/#{id}"
-        path = api_token ? "#{res_path}?api_token=#{api_token}" : res_path
+        path = "#{resource_path}/#{id}?api_token=#{api_token}"
         res = delete path
-        res.success? ? new(res) : bad_response(res, id)
+        unless res.success?
+          bad_response(res, id)
+        end
       end
 
       def find_by_name(name, api_token = nil, opts={})
