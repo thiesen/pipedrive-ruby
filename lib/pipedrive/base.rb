@@ -126,7 +126,6 @@ module Pipedrive
 
       def destroy(id, api_token = nil)
         path = "#{resource_path}/#{id}?api_token=#{api_token}"
-        binding.pry
         res = delete path
         unless res.success?
           bad_response(res, id)
