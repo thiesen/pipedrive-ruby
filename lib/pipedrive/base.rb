@@ -21,7 +21,7 @@ module Pipedrive
     format :json
 
     extend Forwardable
-    def_delegators 'self.class', :delete, :get, :post, :put, :resource_path, :bad_response
+    def_delegators 'self.class', :delete, :destroy, :get, :post, :put, :resource_path, :bad_response
 
     attr_reader :data
 
