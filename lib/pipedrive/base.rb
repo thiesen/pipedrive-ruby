@@ -61,7 +61,7 @@ module Pipedrive
       end
     end
 
-    class << selfgan
+    class << self
       # Sets the authentication credentials in a class variable.
       #
       # @param [String] email cl.ly email
@@ -125,7 +125,8 @@ module Pipedrive
       end
 
       def delete(id, api_token = nil)
-        path = "#{resource_path}/#{id}?api_token=#{ api_token }"
+        res_path = "#{resource_path}/#{id}"
+        path = api_token ? "#{res_path}?api_token=#{api_token}" : res_path
         res = delete path
         res.success? ? new(res) : bad_response(res, id)
       end
